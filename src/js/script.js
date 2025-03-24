@@ -34,14 +34,22 @@
       item.addEventListener('dblclick', function(event){
         //prevent default
         event.preventDefault();
-        //add favorite class to clicked item
-        event.target.classList.add('favorite');
         //select book id from data-id attributte
-        const bookId = event.target.getAttribute('data-id');
-        //add this id to favoriteBooks
+        const bookId = item.getAttribute('data-id');
+
         if(!favoriteBooks.includes(bookId)){
-          favoriteBooks.push(bookId);
+        //add favorite class to clicked item
+        item.classList.add('favorite');
+        //add this id to favoriteBooks
+        favoriteBooks.push(bookId);
+        } else {
+        //remove favorite class from clicked item
+        item.classList.remove('favorite');
+        //remove this id from favoriteBooks
+        favoriteBooks.pop(bookId);
         }
+        console.log('item: ', item);
+        console.log('event.target: ', event.target);
         console.log('favoriteBooks: ', favoriteBooks);
       });
     }
