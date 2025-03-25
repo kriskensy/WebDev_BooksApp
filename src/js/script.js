@@ -48,7 +48,7 @@
           //remove favorite class from clicked item
           bookImage.classList.remove('favorite');
           //remove this id from favoriteBooks
-          const index = favoriteBooks.indexOf(bookImage.value);
+          const index = favoriteBooks.indexOf(bookId);
           if(index !== -1){
             favoriteBooks.splice(index, 1);
           }
@@ -76,7 +76,32 @@
         }
       }
       console.log('filters: ', filters);
+      filterBooks();
     });
+  };
+
+  const filterBooks = function(){
+
+    //for every dataSource.books item
+    for(const book of dataSource.books){
+      //flag for show / hide books
+      let shouldBeHidden = false;
+
+      //for every filter
+      for(const filter of filters){
+        //create filter condition for every book -> iterate for every filter
+        const filterCondition = book.details[filter];
+        //change flag if condition is not met
+        if(!filterCondition){
+          shouldBeHidden = true;
+          break;
+        }
+      }
+      //find book__image for a book
+      const bookItem = document.querySelector(`.book__image[data-id="${book.id}"]`);
+      //toggle hidden class
+      bookItem.classList.toggle('hidden', shouldBeHidden);
+    }
   };
 
   renderBooks();
