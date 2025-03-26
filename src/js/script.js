@@ -20,17 +20,20 @@
 
     //for every book from dataSource.books
     for(const book of dataSource.books){
+      //rating for every book
+      const ratingBgc = determineRatingBgc(book.rating);
+      //convert to %
+      const ratingWidth = book.rating * 10;
       //generate html from data and template
-      const bookHTML = templateBook(book);
+      const bookHTML = templateBook({
+        ...book,
+        ratingBgc,
+        ratingWidth,
+      });
       //create DOM from html
       const bookElementDOM = utils.createDOMFromHTML(bookHTML);
       //add generated DOM as child to bookList
       booksList.appendChild(bookElementDOM);
-
-      // //rating for every book
-      // const ratingBgc = determineRatingBgc(rating);
-      // //convert to %
-      // const ratingWidth = book.rating * 10;
     }
   };
 
@@ -129,7 +132,7 @@
     }
 
     return background;
-  }
+  };
 
   renderBooks();
   initActions();
