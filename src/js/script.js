@@ -19,7 +19,7 @@ class BooksList {
   }
 
   initActions(){
-    this.booksList.addEventListener('dblclick', function(event){
+    this.booksList.addEventListener('dblclick', (event) =>{
       const bookImage = event.target.closest('.book__image');
 
       if(bookImage){
@@ -39,7 +39,7 @@ class BooksList {
       }
     });
 
-    this.filtersList.addEventListener('click', function(event){
+    this.filtersList.addEventListener('click', (event) =>{
       const filterCondition = event.target.tagName === 'INPUT' && event.target.type === 'checkbox' && event.target.name === 'filter';
 
       if(filterCondition){
@@ -74,7 +74,7 @@ class BooksList {
       const bookElementDOM = utils.createDOMFromHTML(bookHTML);
       this.booksList.appendChild(bookElementDOM);
     }
-  };
+  }
 
   filterBooks(){
     for(const book of this.data){
@@ -91,8 +91,8 @@ class BooksList {
 
       const bookItem = document.querySelector(`.book__image[data-id="${book.id}"]`);
       bookItem.classList.toggle('hidden', shouldBeHidden);
+    }
   }
-}
 
   determineRatingBgc(rating){
     let background = null;
